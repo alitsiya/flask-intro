@@ -52,6 +52,20 @@ def say_hello():
           </label>
           <input type="submit">
         </form>
+        <form action="/diss">
+          <label>What's your name? <input type="text" name="person"></label>
+          <label>
+          Select a mean word:
+          <select name="insult">
+            <option value="smelly">smelly</option>
+            <option value="cinohtyP">cinohtyP</option>
+            <option value="ugly">ugly</option>
+            <option value="rude">rude</option>
+          </select>
+          </label>
+          <input type="submit">
+        </form>
+
       </body>
     </html>
     """
@@ -64,7 +78,7 @@ def greet_person():
     player = request.args.get("person")
 
     compliment = request.args.get("compliment")
-
+    print compliment
     return """
     <!doctype html>
     <html>
@@ -77,8 +91,27 @@ def greet_person():
     </html>
     """ % (player, compliment)
 
+@app.route('/diss')
+def diss_person():
+    """Get user by name."""
+
+    player = request.args.get("person")
+
+    insult = request.args.get("insult")
+    
+    return """
+    <!doctype html>
+    <html>
+      <head>
+        <title>A Compliment</title>
+      </head>
+      <body>
+        Hi %s I think you're %s!
+      </body>
+    </html>
+    """ % (player, insult)
 
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads"
-    # our web app if we change the code.
-    app.run(debug=False)
+    # our web app if we change sthe code.
+    app.run(debug=True)
