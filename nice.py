@@ -27,6 +27,8 @@ def start_here():
 def say_hello():
     """Say hello and prompt for user's name."""
 
+    html_tokens = ["<option value='{0}'>{0}</option>".format(c) for c in AWESOMENESS]
+
     return """
     <!doctype html>
     <html>
@@ -40,14 +42,7 @@ def say_hello():
           <label>
           Select a nice word:
           <select name="compliment">
-            <option value="awesome">awesome</option>
-            <option value="terrific">terrific</option>
-            <option value="fantastic">fantastic</option>
-            <option value="Pythonic">Pythonic</option>
-            <option value="fantabulous">fantabulous</option>
-            <option value="wonderful">wonderful</option>
-            <option value="ducky">ducky</option>
-            <option value="brilliant">brilliant</option>
+            %s
           </select>
           </label>
           <input type="submit">
@@ -68,7 +63,7 @@ def say_hello():
 
       </body>
     </html>
-    """
+    """ % '\n'.join(html_tokens)
 
 
 @app.route('/greet')
